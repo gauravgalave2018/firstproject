@@ -1,0 +1,173 @@
+/* MAIN TITLE */
+h1 {
+    text-align: center;
+    color: #ffffff;
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+/* HEADER */
+.header {
+    text-align: center;
+    padding: 40px;
+    background: linear-gradient(to right, #56ab2f, #a8e063);
+    color: white;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* HEADER PARAGRAPH */
+.header p {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+/* BODY */
+body {
+    background-color: #f1f8e9;
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+/* SECTION TITLES */
+h2 {
+    color: #2e7d32;
+    margin-top: 40px;
+    margin-left: 15px;
+    font-size: 28px;
+    border-left: 6px solid #66bb6a;
+    padding-left: 10px;
+}
+
+/* PRODUCT SECTION */
+.product-section {
+    display: grid;
+
+    /* Responsive Cards */
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+
+    gap: 25px;
+    padding: 20px;
+}
+
+/* PRODUCT CARD */
+.product-card {
+    background-color: white;
+    border-radius: 18px;
+    padding: 18px;
+    text-align: center;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+/* CARD HOVER EFFECT */
+.product-card:hover {
+    transform: translateY(-10px);
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+}
+
+/* PRODUCT IMAGE */
+.product-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+
+    border-radius: 12px;
+    margin-top: 10px;
+}
+
+/* PRODUCT NAME */
+.product-card h3 {
+    color: #2e7d32;
+    margin-top: 12px;
+    font-size: 22px;
+}
+
+/* PRICE */
+.product-card p {
+    font-size: 18px;
+    color: #444;
+    margin: 12px 0;
+}
+
+/* ORGANIC BADGE */
+.badge {
+    background: #2e7d32;
+    color: white;
+
+    padding: 10px 16px;
+
+    border-radius: 25px;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    display: inline-block;
+
+    margin-bottom: 15px;
+}
+
+/* BUTTON GROUP */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* BUTTONS */
+button {
+    background-color: #28a745;
+    color: white;
+
+    padding: 10px 16px;
+
+    cursor: pointer;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    transition: all 0.3s ease;
+
+    width: 48%;
+}
+
+/* BUTTON HOVER */
+button:hover {
+    background-color: #1b5e20;
+    transform: scale(1.05);
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+
+    h1 {
+        font-size: 32px;
+    }
+
+    .header {
+        padding: 25px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    .button-group {
+        flex-direction: row;
+    }
+
+    .button-group button {
+        width: 48%;
+        font-size: 13px;
+        padding: 10px;
+    }
+}

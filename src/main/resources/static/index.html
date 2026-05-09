@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Soil To Soul - Organic Food Project</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <span class="badge">🌿 100% Organic</span>
+
+    <div class="header">
+        <h1>🌱 Soil To Soul 🌱</h1>
+        <p>Fresh Organic Products from Local Farms 🌾🍎</p>
+    </div>
+
+    <!-- FRUITS SECTION -->
+    <h2>🍎 Fresh Organic Fruits</h2>
+    <div id="fruit-container" class="product-section"></div>
+
+    <!-- VEGETABLES SECTION -->
+    <h2>🥦 Organic Vegetables</h2>
+    <div id="vegetable-container" class="product-section"></div>
+
+    <!-- MILK PRODUCTS SECTION -->
+    <h2>🥛 Organic Milk Products</h2>
+    <div id="milk-container" class="product-section"></div>
+
+    <script>
+
+        const productApi = "http://localhost:8080/api/products";
+        const cartApi = "http://localhost:8080/api/cart";
+        const orderApi = "http://localhost:8080/api/orders";
+
+        // Containers
+        const fruitContainer = document.getElementById("fruit-container");
+        const vegetableContainer = document.getElementById("vegetable-container");
+        const milkContainer = document.getElementById("milk-container");
+
+        // Fetch products
+        fetch(productApi)
+
+            .then(response => response.json())
+
+            .then(products => {
+
+                products.forEach(product => {
+
+                    let emoji = "";
+
+                    const name = product.name.toLowerCase();
+
+                    // FRUIT EMOJIS
+                    if(name === "mango") emoji = "🥭";
+                    else if(name === "apple") emoji = "🍎";
+                    else if(name === "banana") emoji = "🍌";
+                    else if(name === "papaya") emoji = "🍈";
+                    else if(name === "pomegranate") emoji = "🍷";
+                    else if(name === "strawberry") emoji = "🍓";
+
+                    // VEGETABLE EMOJIS
+                    else if(name === "tomato") emoji = "🍅";
+                    else if(name === "carrot") emoji = "🥕";
+                    else if(name === "potato") emoji = "🥔";
+                    else if(name === "broccoli") emoji = "🥦";
+                    else if(name === "spinach") emoji = "🥬";
+
+                    // MILK PRODUCT EMOJIS
+                    else if(name === "organic milk") emoji = "🥛";
+                    else if(name === "organic paneer") emoji = "🧀";
+                    else if(name === "organic butter") emoji = "🧈";
+                    else if(name === "organic ghee") emoji = "🥫";
+
+                    // Product Card
+                    const div = document.createElement("div");
+
+                    div.classList.add("product-card");
+
+                    div.innerHTML = `
+
+                        <h3>${emoji} ${product.name}</h3>
+
+                        <img src="${product.imageUrl}" 
+                             height="200" 
+                             width="250">
+
+                        <p>💰 Price: ₹${product.price}</p>
+
+                        <div class="button-group">
+
+                            <button onclick="addToCart(${product.id})">
+                                🛒 Add to Cart
+                            </button>
+
+                            <button onclick="buyNow(${product.id})">
+                                ⚡ Buy Now
+                            </button>
+
+                        </div>
+                    `;
+
+                    // SECTION WISE DISPLAY
+
+                    // FRUITS
+                    if (
+                        name === "mango" ||
+                        name === "apple" ||
+                        name === "banana" ||
+                        name === "papaya" ||
+                        name === "pomegranate" ||
+                        name === "strawberry"
+                    ) {
+
+                        fruitContainer.appendChild(div);
+
+                    }
+
+                    // MILK PRODUCTS
+                    else if (
+                        name === "organic milk" ||
+                        name === "organic paneer" ||
+                        name === "organic butter" ||
+                        name === "organic ghee"
+                    ) {
+
+                        milkContainer.appendChild(div);
+
+                    }
+
+                    // VEGETABLES
+                    else {
+
+                        vegetableContainer.appendChild(div);
+                    }
+
+                });
+
+            })
+
+            .catch(error => console.error("Error:", error));
+
+
+
+        // ADD TO CART
+        function addToCart(productId) {
+
+            fetch(`${cartApi}/${productId}`, {
+                method: "POST"
+            })
+
+            .then(response => response.json())
+
+            .then(data => {
+                alert("🛒 Product added to cart!");
+            })
+
+            .catch(error => {
+                console.error("Error:", error);
+                alert("❌ Failed to add to cart");
+            });
+        }
+
+
+
+        // BUY NOW
+        function buyNow(productId) {
+
+            fetch(`${orderApi}/${productId}`, {
+                method: "POST"
+            })
+
+            .then(response => response.json())
+
+            .then(data => {
+                alert("⚡ Order placed successfully!");
+            })
+
+            .catch(error => {
+                console.error("Error:", error);
+                alert("❌ Order failed");
+            });
+        }
+
+    </script>
+
+</body>
+
+</html>
